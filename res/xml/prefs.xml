@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="science"
+        android:title="Science" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="engineering"
+        android:title="Engineering" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="arts"
+        android:title="Arts" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="history"
+        android:title="History" />
+
+    <ListPreference
+        android:entries="@array/list"
+        android:entryValues="@array/lValues"
+        android:key="list"
+        android:summary="What do you find interesting?"
+        android:title="list" >
+    </ListPreference>
+
+</PreferenceScreen>
