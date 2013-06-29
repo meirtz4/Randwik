@@ -1,8 +1,7 @@
 <resources>
 
-    <string name="app_name">wikiBeta_003</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Random Wikipedia Articles</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_manager">Manager</string>
+    <string name="title_activity_manager">Random Wikipedia Articles</string>
 
 </resources>
