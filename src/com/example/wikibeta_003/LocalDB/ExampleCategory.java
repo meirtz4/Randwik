@@ -5,11 +5,11 @@ import java.util.Random;
 import LocalExceptions.UnimplementedException;
 
 import com.example.wikibeta_003.ECategories;
-import com.example.wikibeta_003.Interfaces.ICatagoryListOfArticles;
+import com.example.wikibeta_003.Interfaces.ICategoryListOfArticles;
 
-public class ExampleCatagory implements ICatagoryListOfArticles{
+public class ExampleCategory implements ICategoryListOfArticles{
 
-	protected static ICatagoryListOfArticles catagoryListOfArticlesInstance = null;
+	protected static ICategoryListOfArticles catagoryListOfArticlesInstance = null;
 	protected Random rand = new Random(System.currentTimeMillis());
 	
 	protected static String[] listOfArticlesNames = {"Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
@@ -207,15 +207,15 @@ public class ExampleCatagory implements ICatagoryListOfArticles{
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School",};
 	
-	protected ExampleCatagory(){
+	protected ExampleCategory(){
 		//for (String article : listOfArticlesNames) {
 		//	articlesNames.add(article);
 		//}
 	}
 	
-	public static ICatagoryListOfArticles getCatagory() {
+	public static ICategoryListOfArticles getCatagory() {
 		if (catagoryListOfArticlesInstance == null)
-			catagoryListOfArticlesInstance = new ExampleCatagory();
+			catagoryListOfArticlesInstance = new ExampleCategory();
 		return catagoryListOfArticlesInstance;
 	}
 

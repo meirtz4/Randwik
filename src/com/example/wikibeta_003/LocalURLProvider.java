@@ -7,9 +7,9 @@ import java.util.Stack;
 
 import LocalExceptions.UnimplementedException;
 
-import com.example.wikibeta_003.Interfaces.ICatagoryListOfArticles;
+import com.example.wikibeta_003.Interfaces.ICategoryListOfArticles;
 import com.example.wikibeta_003.Interfaces.IURLProvider;
-import com.example.wikibeta_003.LocalDB.ExampleCatagory;
+import com.example.wikibeta_003.LocalDB.ExampleCategory;
 
 
 
@@ -17,11 +17,11 @@ public class LocalURLProvider implements IURLProvider{
 
 	private static String pageLinkPrefix = "http://en.wikipedia.org/wiki/";
 	private static IURLProvider singleProvider = null;
-	private Map<ECategories, ICatagoryListOfArticles> catagoriesDictionary = new HashMap<ECategories, ICatagoryListOfArticles>();
+	private Map<ECategories, ICategoryListOfArticles> catagoriesDictionary = new HashMap<ECategories, ICategoryListOfArticles>();
 	Random rand = new Random(System.currentTimeMillis());
 
 	protected LocalURLProvider(){
-		catagoriesDictionary.put(ECategories.Example, ExampleCatagory.getCatagory());
+		catagoriesDictionary.put(ECategories.Example, ExampleCategory.getCatagory());
 	}
 	
 	public static IURLProvider getURLProvider() {
@@ -32,7 +32,7 @@ public class LocalURLProvider implements IURLProvider{
 	
 	public String getRandomPage(ECategories[] catagories, Stack<String> previousPages) throws InterruptedException {
 		ECategories choosenCatagoryEnum = chooseFromCatagorysList(catagories);
-		ICatagoryListOfArticles choosenCatagory = catagoriesDictionary.get(choosenCatagoryEnum);
+		ICategoryListOfArticles choosenCatagory = catagoriesDictionary.get(choosenCatagoryEnum);
 		String URLToReturn, choosenPage;
 		Boolean pageAlreadyVisited = true;
 		

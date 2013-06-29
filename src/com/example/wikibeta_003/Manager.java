@@ -30,7 +30,7 @@ public class Manager extends Activity {
 	boolean pageIsLoading;
 	boolean loadPrePage;
 	String lastPageForStack = "";
-	ECategories[] currentCatagories = {ECategories.Example};
+	ECategories[] currentCategories = {ECategories.Example};
 
 
 	@Override
@@ -105,7 +105,7 @@ public class Manager extends Activity {
 				else{ 
 					if (!lastPageForStack.equals(""))
 						previousPages.push(lastPageForStack);
-					pageLink = provider.getRandomPage(currentCatagories, previousPages);
+					pageLink = provider.getRandomPage(currentCategories, previousPages);
 					lastPageForStack = pageLink;
 				}
 				myWebView.loadUrl(pageLink);

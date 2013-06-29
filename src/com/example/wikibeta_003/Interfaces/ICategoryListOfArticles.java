@@ -4,7 +4,7 @@ import com.example.wikibeta_003.ECategories;
 
 import LocalExceptions.UnimplementedException;
 
-public interface ICatagoryListOfArticles {
+public interface ICategoryListOfArticles {
 
 	public String getRandomArticle(Boolean noReturn)  throws UnimplementedException;
 	public String getCatagoryName();
