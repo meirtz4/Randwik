@@ -1,2 +1,5 @@
 bin/resources.ap_
 bin/wikiBeta_003.apk
+*.class
+bin/
+bin

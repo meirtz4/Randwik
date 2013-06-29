@@ -12,8 +12,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 
+import com.example.wikibeta_003.Interfaces.IURLProvider;
 
-public class URLProvider{
+public class HTTPURLProvider implements IURLProvider{
+
 	private String category = "computer science";
 	private String categoryString = "Category:";
 	private int categoryStringLength = categoryString.length();
@@ -23,8 +25,15 @@ public class URLProvider{
 	private static String titleString = "title] => ";
 	private static int titleStringLength = titleString.length();
 	private Stack<String> pagesVisited = new Stack<String>();
-	
-	public String getRandomPage(Stack<String> previousPages) throws InterruptedException {
+
+	private static IURLProvider singleProvider = null;
+
+	public static LocalURLProvider getURLProvider() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getRandomPage(ECategories[] catagories, Stack<String> previousPages) throws InterruptedException {
 		pagesVisited = previousPages;
 		getter = new privateArticleNameGetter();
 		getter.run();
@@ -34,7 +43,7 @@ public class URLProvider{
 	}
 
 	private String ProviderParseRandomAnswerToArticleName() throws InterruptedException {
-		
+
 		privateArticleNameGetter categoryGetter = new privateArticleNameGetter();
 		while(answer.length()>0){
 			String firstChar = answer.substring(0, 1);
@@ -88,23 +97,25 @@ public class URLProvider{
 		public void run() {
 			super.run();
 			HttpClient client = new DefaultHttpClient(new BasicHttpParams());
-	        String json = "";
-	        category = category.replace(" ", "%20");
-	        try {
-	            String line = "";
-	            HttpGet request = new HttpGet("http://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:" + category + "&format=txt&cmlimit=max");
-	            HttpResponse response = client.execute(request);
-	            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-	            while ((line = rd.readLine()) != null) {
-	                json += line + System.getProperty("line.separator");
-	            }
-	        } catch (IllegalArgumentException e1) {
-	            e1.printStackTrace();
-	        } catch (IOException e2) {
-	            e2.printStackTrace();
-	        }
-	        answer = json;
+			String json = "";
+			category = category.replace(" ", "%20");
+			try {
+				String line = "";
+				HttpGet request = new HttpGet("http://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:" + category + "&format=txt&cmlimit=max");
+				HttpResponse response = client.execute(request);
+				BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				while ((line = rd.readLine()) != null) {
+					json += line + System.getProperty("line.separator");
+				}
+			} catch (IllegalArgumentException e1) {
+				e1.printStackTrace();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+			answer = json;
 		}
 	}
+
 }
+
 

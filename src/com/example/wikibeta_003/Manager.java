@@ -3,6 +3,7 @@ package com.example.wikibeta_003;
 import java.util.Stack;
 
 import com.example.wikibeta_003.R;
+import com.example.wikibeta_003.Interfaces.IURLProvider;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -16,12 +17,12 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.TextView;
+
 
 public class Manager extends Activity {
 
-
-	URLProvider provider = new URLProvider();
+	IURLProvider provider = LocalURLProvider.getURLProvider();
+	
 	Button getRand;
 	Button back;
 	WebView myWebView;
@@ -29,6 +30,7 @@ public class Manager extends Activity {
 	boolean pageIsLoading;
 	boolean loadPrePage;
 	String lastPageForStack = "";
+	ECategories[] currentCatagories = {ECategories.Example};
 
 
 	@Override
@@ -103,7 +105,7 @@ public class Manager extends Activity {
 				else{ 
 					if (!lastPageForStack.equals(""))
 						previousPages.push(lastPageForStack);
-					pageLink = provider.getRandomPage(previousPages);
+					pageLink = provider.getRandomPage(currentCatagories, previousPages);
 					lastPageForStack = pageLink;
 				}
 				myWebView.loadUrl(pageLink);
@@ -116,7 +118,6 @@ public class Manager extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch(item.getItemId()) {
 		case R.id.preferences:
 			Intent p = new Intent("android.intent.action.PREFS");
