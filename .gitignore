@@ -3,5 +3,6 @@ bin/wikiBeta_003.apk
 *.class
 bin/
 bin
+/bin/
 bin/classes/com/example/wikibeta_003/Manager$PageLoader.class
 bin/classes/com/example/wikibeta_003/Manager.class
