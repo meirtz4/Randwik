@@ -1,8 +1,16 @@
-bin/resources.ap_
-bin/wikiBeta_003.apk
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
 *.class
+
+# generated files
 bin/
-bin
-/bin/
-bin/classes/com/example/wikibeta_003/Manager$PageLoader.class
-bin/classes/com/example/wikibeta_003/Manager.class
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
