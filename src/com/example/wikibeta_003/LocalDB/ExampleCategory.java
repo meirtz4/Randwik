@@ -16,7 +16,7 @@ public class ExampleCategory implements ICategoryListOfArticles{
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
-		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
+		"Quinebaug Mill – Quebec Square Historic District","Israel","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
 		"Quinebaug Mill – Quebec Square Historic District","Punamusta","Jules de Rohan","Kieran Doherty","Bracken County High School","Killke culture","Occupational therapy in Seychelles","Piraeus A","Tribunj",
