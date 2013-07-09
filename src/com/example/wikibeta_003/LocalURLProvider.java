@@ -1,9 +1,7 @@
 package com.example.wikibeta_003;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
@@ -20,7 +18,6 @@ public class LocalURLProvider implements IURLProvider{
 
 	private static String pageLinkPrefix = "http://en.wikipedia.org/wiki/";
 	private static IURLProvider singleProvider = null;
-	//private Map<ECategories, ICategoryListOfArticles> catagoriesDictionary = new HashMap<ECategories, ICategoryListOfArticles>();
 	private List<ICategoryListOfArticles> catagoriesList = new ArrayList<ICategoryListOfArticles>();
 	Random rand = new Random(System.currentTimeMillis());
 

@@ -28,9 +28,14 @@ public class HTTPURLProvider implements IURLProvider{
 
 	private static IURLProvider singleProvider = null;
 
-	public static LocalURLProvider getURLProvider() {
-		// TODO Auto-generated method stub
-		return null;
+	protected HTTPURLProvider(){
+		
+	}
+	
+	public static IURLProvider getURLProvider() {
+		if (singleProvider == null)
+			singleProvider = new LocalURLProvider();
+		return singleProvider;
 	}
 
 	public String getRandomPage(ECategories[] catagories, Stack<String> previousPages) throws InterruptedException {
