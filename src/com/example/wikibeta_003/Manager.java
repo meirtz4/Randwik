@@ -7,8 +7,12 @@ import com.example.wikibeta_003.Interfaces.IURLProvider;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,36 +27,44 @@ import android.widget.Button;
 public class Manager extends Activity {
 
 	private static ECategories[] currentCategories = {ECategories.Example};
-	IURLProvider provider = LocalURLProvider.getURLProvider();
+	IURLProvider provider = SimpleURLProvider.getURLProvider(); /* Update here for switch to another provider */
 	PageLoader loader = new PageLoader();
 	private Stack<String> previousPages = new Stack<String>();
 
 	boolean backButtonClicked = false;
+	boolean doneLoadingPage = false;
+	boolean loadingFinished = true;
+	boolean redirect = false;
 	String lastPageForStack = "";
 	ProgressDialog loadingWindow = null;
 
-	// View Elements
+	Object waitForFinishLoad = new Object();
+	Object waitForNextRun = new Object();
+
+	/* View Elements */
 	Button buttonGetRandomWikiPage;
 	Button buttonGoBack;
 	WebView webViewMain;
 
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_manager);
-		setViewElements();
 		showLoadingWindow();
+		setViewElements();
 		loader.start();
+
 	}
 
-	
+
 	protected void showLoadingWindow(){
+		doneLoadingPage = false;
 		loadingWindow = new ProgressDialog(Manager.this);
 		loadingWindow.setTitle("Loading");
-		loadingWindow.setMessage("Wait while loading...");
+		loadingWindow.setMessage("");
 		loadingWindow.show();
 	}
 
@@ -82,58 +94,106 @@ public class Manager extends Activity {
 	private void setViewElements() {
 
 		webViewMain = (WebView) findViewById(R.id.wvBrowser);
+		buttonGetRandomWikiPage = (Button) findViewById(R.id.randWiki);
+		buttonGoBack = (Button) findViewById(R.id.back);
+
 		webViewMain.setWebViewClient(new WebViewClient() {
+
 			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				view.loadUrl(url);
-				return false;
+			public boolean shouldOverrideUrlLoading(WebView view, String urlNewString) {
+				if (!loadingFinished) {
+					redirect = true;
+				}
+				loadingFinished = false;
+				webViewMain.loadUrl(urlNewString);
+				return true;
+			}
+
+
+			@Override
+			public void onPageStarted(WebView view, String url,  Bitmap favicon) {
+				loadingFinished = false;
+				//SHOW LOADING IF IT ISNT ALREADY VISIBLE  
+			}
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				if(!redirect){
+					loadingFinished = true;
+				}
+				if(loadingFinished && !redirect){
+					doneLoadingPage = true;
+					synchronized (waitForFinishLoad) {
+						waitForFinishLoad.notifyAll();
+						Log.e("webViewMain THREAD INFO", "Page finished loading");
+					}
+				} else{
+					redirect = false; 
+				}
+
+
 			}
 		});
 
-		buttonGetRandomWikiPage = (Button) findViewById(R.id.randWiki);
 		buttonGetRandomWikiPage.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				showLoadingWindow();
-				backButtonClicked = false;
-				loader.run();
+				synchronized (waitForNextRun) {
+					waitForNextRun.notifyAll();
+				}
 			}
 		});
 
-		buttonGoBack = (Button) findViewById(R.id.back);
+
 		buttonGoBack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showLoadingWindow();
+				if (previousPages.isEmpty())
+					return;
 				backButtonClicked = true;
-				loader.run();
+				showLoadingWindow();
+				synchronized (waitForNextRun) {
+						waitForNextRun.notifyAll();
+				}
 			}
 		});
 	}
 
-
-	
-	
 	private class PageLoader extends Thread {
 
 		@Override
 		public void run() {
-			loadPage();
-			doneLoading();
+			while (true) {
+				loadPage();
+				doneLoading();
+				backButtonClicked = false;
+				synchronized (waitForNextRun) {
+					try {
+						waitForNextRun.wait();
+					} catch (InterruptedException e) {}
+				}
+			}
 		}
 
 		public void doneLoading() {
-			backButtonClicked = false;
-			loadingWindow.dismiss(); // Hide loading window
+			while (!doneLoadingPage){
+				try {
+					synchronized (waitForFinishLoad) {
+						waitForFinishLoad.wait();
+						Log.e("PageLoader THREAD INFO", "Done loading finished");
+					}
+				} catch (InterruptedException e) {
+					Log.e("Manager", e.getMessage());
+				}
+			}
+			loadingWindow.dismiss(); /* Hide loading window */
 		}
 
 		private void loadPage(){
 			try {
 				String pageLink;
-				if (backButtonClicked && (!previousPages.isEmpty())){
+				if (backButtonClicked){
 					pageLink = previousPages.pop();
-				}
-				else if (backButtonClicked && (previousPages.isEmpty())){
-					return;
 				}
 				else{ 
 					if (!lastPageForStack.equals(""))
@@ -142,12 +202,10 @@ public class Manager extends Activity {
 					lastPageForStack = pageLink;
 				}
 				webViewMain.loadUrl(pageLink);
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}	
 	}  
-
-
-
 }
