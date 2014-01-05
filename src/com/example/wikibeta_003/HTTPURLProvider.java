@@ -1,3 +1,10 @@
+/***
+ * 	Not in use at the moment
+ * 	@author Meir Levy
+ *	@version 1.1
+ */
+
+
 package com.example.wikibeta_003;
 
 import java.io.BufferedReader;
@@ -38,7 +45,7 @@ public class HTTPURLProvider implements IURLProvider{
 		return singleProvider;
 	}
 
-	public String getRandomPage(ECategories[] catagories, Stack<String> previousPages) throws InterruptedException {
+	public String getRandomPage(String[] catagories, Stack<String> previousPages) throws InterruptedException {
 		pagesVisited = previousPages;
 		getter = new privateArticleNameGetter();
 		getter.run();

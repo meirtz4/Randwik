@@ -1,28 +1,25 @@
 package com.example.wikibeta_003;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-import LocalExceptions.CatagoryMismatchException;
 import LocalExceptions.UnimplementedException;
 
+import android.util.Log;
+
+import com.example.wikibeta_003.Interfaces.ICategoryDB;
 import com.example.wikibeta_003.Interfaces.ICategoryListOfArticles;
 import com.example.wikibeta_003.Interfaces.IURLProvider;
-import com.example.wikibeta_003.LocalDB.ExampleCategory;
-
-
 
 public class LocalURLProvider implements IURLProvider{
 
 	private static String pageLinkPrefix = "http://en.wikipedia.org/wiki/";
 	private static IURLProvider singleProvider = null;
-	private List<ICategoryListOfArticles> catagoriesList = new ArrayList<ICategoryListOfArticles>();
+	private ICategoryDB categoryDB = CategoriesMap.getCategoriesMap();
+	//private static Map<ECategories, AbstractCategory> catagoriesList;
 	Random rand = new Random(System.currentTimeMillis());
 
 	protected LocalURLProvider(){
-		catagoriesList.add(ExampleCategory.getCatagory());
 	}
 	
 	public static IURLProvider getURLProvider() {
@@ -31,11 +28,13 @@ public class LocalURLProvider implements IURLProvider{
 		return singleProvider;
 	}
 	
-	public String getRandomPage(ECategories[] catagories, Stack<String> previousPages) throws InterruptedException {
+	public String getRandomPage(String[] catagories, Stack<String> previousPages) throws InterruptedException {
 		String URLToReturn, choosenPage;
 		Boolean pageAlreadyVisited = true;
 		try {
-			ICategoryListOfArticles choosenCatagory = chooseFromCatagorysList(catagories);
+			// go to options menu and update categories
+			ICategoryListOfArticles choosenCatagory = categoryDB.getRandomCategoryOfAList(catagories);
+			Log.e("LocalURLProvider", "Choosen category is - " + choosenCatagory.getCatagoryName());
 			do {
 				choosenPage = choosenCatagory.getRandomArticle(false);
 				if (previousPages.search(choosenPage) < 0) 
@@ -47,19 +46,8 @@ public class LocalURLProvider implements IURLProvider{
 			URLToReturn = pageLinkPrefix + choosenPage;
 		} catch (UnimplementedException e) {
 			return "wikipedia";
-		} catch (CatagoryMismatchException e) {
-			return "wikipedia";
 		}
 		return URLToReturn;
-	}
-	
-	protected ICategoryListOfArticles chooseFromCatagorysList(ECategories[] catagorys) throws CatagoryMismatchException {
-		ECategories choosenCatagoryEnum = catagorys[rand.nextInt(catagorys.length)];
-		for(ICategoryListOfArticles cat : catagoriesList){
-			if(choosenCatagoryEnum.equals(cat.getCatagoryEnum()))
-				return cat;
-		}
-		throw new CatagoryMismatchException();
 	}
 }
 

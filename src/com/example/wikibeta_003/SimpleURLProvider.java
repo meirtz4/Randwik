@@ -77,10 +77,8 @@ public class SimpleURLProvider implements IURLProvider {
 	}
 
 	@Override
-	public String getRandomPage(ECategories[] catagories,
+	public String getRandomPage(String[] catagories,
 			Stack<String> previousPages) throws InterruptedException {
-
-
 		getter = new privateArticleNameGetter();
 		getter.run();
 		getter.join();

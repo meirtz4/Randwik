@@ -1,7 +1,13 @@
+/***
+ * 	Manager class is in charge of invoking the URL from the requested provider.
+ * 	Also to manage the communication between the user and the App.
+ * 	@author Meir Levy
+ *	@version 1.1
+ */
+
 package com.example.wikibeta_003;
 
 import java.util.Stack;
-
 import com.example.wikibeta_003.R;
 import com.example.wikibeta_003.Interfaces.IURLProvider;
 
@@ -21,21 +27,33 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
-
 public class Manager extends Activity {
 
-	private static ECategories[] currentCategories = {ECategories.Example};
-	IURLProvider provider = SimpleURLProvider.getURLProvider(); /* Update here for switch to another provider */
+	/* Update here for switch to another provider */
+	//IURLProvider provider = SimpleURLProvider.getURLProvider(); 
+	IURLProvider provider = LocalURLProvider.getURLProvider();
+	
+	/* TODO! Remove this when we can get the chosen categories from the user */
+	private static String[] currentCategories = {"Nature"};
+	
+	/* Local thread that load the page */
 	PageLoader loader = new PageLoader();
+	
+	/* Stack for saving previous pages,
+	 * lastPageForStack is to save the current page when getting a new one */
 	private Stack<String> previousPages = new Stack<String>();
+	String lastPageForStack = "";
 
 	boolean backButtonClicked = false;
 	boolean doneLoadingPage = false;
+	
+	/* Both boolean variables are used to solve the double URL load issue (detailed below) */
 	boolean loadingFinished = true;
 	boolean redirect = false;
-	String lastPageForStack = "";
+	
 	ProgressDialog loadingWindow = null;
-
+	
+	/* Objects used for thread to wait */
 	Object waitForFinishLoad = new Object();
 	Object waitForNextRun = new Object();
 
@@ -43,7 +61,7 @@ public class Manager extends Activity {
 	Button buttonGetRandomWikiPage;
 	Button buttonGoBack;
 	WebView webViewMain;
-
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +75,6 @@ public class Manager extends Activity {
 
 	}
 
-
 	protected void showLoadingWindow(){
 		doneLoadingPage = false;
 		loadingWindow = new ProgressDialog(Manager.this);
@@ -66,14 +83,13 @@ public class Manager extends Activity {
 		loadingWindow.show();
 	}
 
-
+	/* TODO! Create the option menu */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pref_menu, menu);
 		return true;
 	}
-
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
@@ -88,9 +104,7 @@ public class Manager extends Activity {
 		return false;
 	}
 
-
 	private void setViewElements() {
-
 		webViewMain = (WebView) findViewById(R.id.wvBrowser);
 		buttonGetRandomWikiPage = (Button) findViewById(R.id.randWiki);
 		buttonGoBack = (Button) findViewById(R.id.back);
@@ -106,7 +120,6 @@ public class Manager extends Activity {
 				webViewMain.loadUrl(urlNewString);
 				return true;
 			}
-
 
 			@Override
 			public void onPageStarted(WebView view, String url,  Bitmap favicon) {
@@ -128,8 +141,6 @@ public class Manager extends Activity {
 				} else{
 					redirect = false; 
 				}
-
-
 			}
 		});
 
@@ -141,7 +152,6 @@ public class Manager extends Activity {
 				}
 			}
 		});
-
 
 		buttonGoBack.setOnClickListener(new OnClickListener() {
 			@Override
@@ -157,6 +167,7 @@ public class Manager extends Activity {
 		});
 	}
 
+	
 	private class PageLoader extends Thread {
 
 		@Override
@@ -199,6 +210,7 @@ public class Manager extends Activity {
 					pageLink = provider.getRandomPage(currentCategories, previousPages);
 					lastPageForStack = pageLink;
 				}
+				Log.e("Got page link", pageLink);
 				webViewMain.loadUrl(pageLink);
 
 			} catch (InterruptedException e) {
