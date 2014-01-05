@@ -1,4 +1,15 @@
-package com.example.wikibeta_003;
+/***
+ * This is a local "database" for manage all the categories of the App,
+ * we need to suggest a better database but meanwhile this will do the job.
+ * To add categories please insert them in the class constructor as the example:
+ * 		this.put("NameCategory", new NameCategory());
+ * 		where NameCategory() should be an extension of AbstractCategory
+ * CategoriesMap is a Singleton
+ * @author Meir Levy
+ * @version 1.1
+ */
+
+package com.example.wikibeta_003.LocalDB;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -7,8 +18,6 @@ import android.util.Log;
 
 import com.example.wikibeta_003.Interfaces.ICategoryDB;
 import com.example.wikibeta_003.Interfaces.ICategoryListOfArticles;
-import com.example.wikibeta_003.LocalDB.AbstractCategory;
-import com.example.wikibeta_003.LocalDB.NatureCategory;
 
 public class CategoriesMap extends HashMap<String, AbstractCategory> implements ICategoryDB{
 
@@ -32,6 +41,7 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 
 	private void initCategories() {
 		int initCounter = 0;
+		/* Go over all the categories and set them their given names */
 		for(Entry<String, AbstractCategory> entry : this.entrySet()){
 			entry.getValue().setCatagoryName(entry.getKey());
 			initCounter++;
@@ -46,7 +56,7 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 	}
 	
 	@Override
-	public ICategoryListOfArticles getRandomCategoryOfAList(String[] catagories) {
+	public ICategoryListOfArticles getRandomCategoryFromAList(String[] catagories) {
 		Random random = new Random();
 		String choosenOne = catagories[random.nextInt(catagories.length)];
 		return this.get(choosenOne);

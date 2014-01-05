@@ -1,3 +1,10 @@
+/***
+ * Local provider is getting the articles from a per created local data base
+ * LocalURLProvider is a Singleton and uses CategoriesMap as his a
+ * @author Meir Levy
+ * @version 1.1
+ */
+
 package com.example.wikibeta_003;
 
 import java.util.Random;
@@ -10,13 +17,13 @@ import android.util.Log;
 import com.example.wikibeta_003.Interfaces.ICategoryDB;
 import com.example.wikibeta_003.Interfaces.ICategoryListOfArticles;
 import com.example.wikibeta_003.Interfaces.IURLProvider;
+import com.example.wikibeta_003.LocalDB.CategoriesMap;
 
 public class LocalURLProvider implements IURLProvider{
 
 	private static String pageLinkPrefix = "http://en.wikipedia.org/wiki/";
 	private static IURLProvider singleProvider = null;
 	private ICategoryDB categoryDB = CategoriesMap.getCategoriesMap();
-	//private static Map<ECategories, AbstractCategory> catagoriesList;
 	Random rand = new Random(System.currentTimeMillis());
 
 	protected LocalURLProvider(){
@@ -28,15 +35,20 @@ public class LocalURLProvider implements IURLProvider{
 		return singleProvider;
 	}
 	
+	/**
+	 * @param catagories - The list of possible categories chosen by the user
+	 */
 	public String getRandomPage(String[] catagories, Stack<String> previousPages) throws InterruptedException {
 		String URLToReturn, choosenPage;
 		Boolean pageAlreadyVisited = true;
 		try {
-			// go to options menu and update categories
-			ICategoryListOfArticles choosenCatagory = categoryDB.getRandomCategoryOfAList(catagories);
+			/* Chose a category out of the possibilities of the user */
+			ICategoryListOfArticles choosenCatagory = categoryDB.getRandomCategoryFromAList(catagories);
 			Log.e("LocalURLProvider", "Choosen category is - " + choosenCatagory.getCatagoryName());
 			do {
+				/* Get a random article from the category */
 				choosenPage = choosenCatagory.getRandomArticle(false);
+				/* Make sure the page is not in the previous pages stack - please suggest a better solution for that */
 				if (previousPages.search(choosenPage) < 0) 
 				{
 					pageAlreadyVisited = false;
@@ -45,6 +57,7 @@ public class LocalURLProvider implements IURLProvider{
 			
 			URLToReturn = pageLinkPrefix + choosenPage;
 		} catch (UnimplementedException e) {
+			Log.e("getRandomPage", "FAIL to get random page!");
 			return "wikipedia";
 		}
 		return URLToReturn;

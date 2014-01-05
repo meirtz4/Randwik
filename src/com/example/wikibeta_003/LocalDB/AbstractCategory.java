@@ -1,3 +1,10 @@
+/***
+ * AbstractCategory used for the LocalURLProvider and it is actually a database for articles names.
+ * Each category will inherit from it and will use the common function that are implemented here.
+ * @author Meir Levy
+ * @version 1.1
+ */
+
 package com.example.wikibeta_003.LocalDB;
 
 import java.util.Random;

@@ -1,3 +1,11 @@
+/***
+ * The simple provider is returning totally random articles from wikipedia,
+ * it has no used but to make testing over the application with simpler provider
+ * SimpleURLProvider is a Singelton (like the others providers)
+ * @author Meir Levy
+ * @version 1.1
+ */
+
 package com.example.wikibeta_003;
 
 import java.io.BufferedReader;

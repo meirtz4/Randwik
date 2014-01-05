@@ -32,13 +32,13 @@ public class Manager extends Activity {
 	/* Update here for switch to another provider */
 	//IURLProvider provider = SimpleURLProvider.getURLProvider(); 
 	IURLProvider provider = LocalURLProvider.getURLProvider();
-	
+
 	/* TODO! Remove this when we can get the chosen categories from the user */
 	private static String[] currentCategories = {"Nature"};
-	
+
 	/* Local thread that load the page */
 	PageLoader loader = new PageLoader();
-	
+
 	/* Stack for saving previous pages,
 	 * lastPageForStack is to save the current page when getting a new one */
 	private Stack<String> previousPages = new Stack<String>();
@@ -46,13 +46,13 @@ public class Manager extends Activity {
 
 	boolean backButtonClicked = false;
 	boolean doneLoadingPage = false;
-	
+
 	/* Both boolean variables are used to solve the double URL load issue (detailed below) */
 	boolean loadingFinished = true;
 	boolean redirect = false;
-	
+
 	ProgressDialog loadingWindow = null;
-	
+
 	/* Objects used for thread to wait */
 	Object waitForFinishLoad = new Object();
 	Object waitForNextRun = new Object();
@@ -61,7 +61,7 @@ public class Manager extends Activity {
 	Button buttonGetRandomWikiPage;
 	Button buttonGoBack;
 	WebView webViewMain;
-	
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class Manager extends Activity {
 		getMenuInflater().inflate(R.menu.pref_menu, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
@@ -109,6 +109,11 @@ public class Manager extends Activity {
 		buttonGetRandomWikiPage = (Button) findViewById(R.id.randWiki);
 		buttonGoBack = (Button) findViewById(R.id.back);
 
+		/***
+		 * The WebView has a know issue that the function onPageFinished is invoked
+		 * more then once when loading the URL, those 3 functions below create a work-around
+		 * that enables us to identify the real invoke of onPageFinished 
+		 */
 		webViewMain.setWebViewClient(new WebViewClient() {
 
 			@Override
@@ -124,7 +129,6 @@ public class Manager extends Activity {
 			@Override
 			public void onPageStarted(WebView view, String url,  Bitmap favicon) {
 				loadingFinished = false;
-				//SHOW LOADING IF IT ISNT ALREADY VISIBLE  
 			}
 
 			@Override
@@ -133,6 +137,7 @@ public class Manager extends Activity {
 					loadingFinished = true;
 				}
 				if(loadingFinished && !redirect){
+					/* Now the page REALLY finished loading */
 					doneLoadingPage = true;
 					synchronized (waitForFinishLoad) {
 						waitForFinishLoad.notifyAll();
@@ -161,15 +166,17 @@ public class Manager extends Activity {
 				backButtonClicked = true;
 				showLoadingWindow();
 				synchronized (waitForNextRun) {
-						waitForNextRun.notifyAll();
+					waitForNextRun.notifyAll();
 				}
 			}
 		});
 	}
 
-	
+
+	/* Local thread that load the page */
 	private class PageLoader extends Thread {
 
+		/* Invoked on startup, when buttons get and back are clicked */
 		@Override
 		public void run() {
 			while (true) {
@@ -207,10 +214,13 @@ public class Manager extends Activity {
 				else{ 
 					if (!lastPageForStack.equals(""))
 						previousPages.push(lastPageForStack);
+					/* Here we get the page link from the provider */
 					pageLink = provider.getRandomPage(currentCategories, previousPages);
 					lastPageForStack = pageLink;
 				}
 				Log.e("Got page link", pageLink);
+				
+				/* Loading the page */
 				webViewMain.loadUrl(pageLink);
 
 			} catch (InterruptedException e) {
