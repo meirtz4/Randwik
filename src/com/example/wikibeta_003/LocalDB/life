@@ -1,0 +1,9 @@
+package com.example.wikibeta_003.LocalDB;
+public class life extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"Value of life","The Seven Pillars of Life","Philosophy of life","Organism","Non-cellular life","Meaning of life","Living systems","Life sciences","List of life forms","Immortality","Extraterrestrial life","Death","Birth","Biota (taxonomy)","Biomedical cybernetics","Biological organisation","Biocentric universe","Life",}
+}

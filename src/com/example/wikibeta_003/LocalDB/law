@@ -1,0 +1,10 @@
+package com.example.wikibeta_003.LocalDB;
+public class law extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"Wrong","Vulnerable adult","UPSI","Unofficial law","Universal law","United Nations Audiovisual Library of International Law","Trigger law","Theft","Terroristic threat","Tallinn Manual","Substantive rights","Seriousness","Secret law","Rule according to higher law","Rollback (legislation)","Rights","Reasonability","Public interest","Promise","Proactive Law","Privacy","Preamble","Ordinary law","Oral law","Julius B. Ness","Ministerial decree","Mercy","Meca-Medina ruling","Leximetrics","Legitimate use of force","Legislative act","Legal tests","Legal recognition","Legal profession","Legal Opportunity Structure","Legal debate","Legal Cost Finance","Legal case","Legal biography","Law of Serbia","Issue (legal)","International law","Internal passport","Ibero-American Association of Public Prosecutors","Human rights","Customary law","Constitutional law","Constitutional economics","Community sentence","Child pirate",
+			"Bob Donnelly","Ambiguity (law)","Adoption law","Administration of justice","Actio","Portal:Law","Outline of law","Index of law articles","Law",}
+}

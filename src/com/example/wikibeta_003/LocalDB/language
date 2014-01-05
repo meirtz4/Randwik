@@ -1,0 +1,10 @@
+package com.example.wikibeta_003.LocalDB;
+public class language extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"Whistled speech among Kickapoo Indians in Mexico","Vocal language","Vocabulary","Visual language","Vernacular orientation","Verbal language in dreams","Uyghurjin script","Uncertain plural","Transitional bilingualism","Terministic screens","Sublanguage","Standard language","Spoken language","Speech repetition","Speech production","Speech","Sona language (artificial)","Sign language","Sidetic script","Shabda","Second language","Rhema","Reply","Problem of religious language","Pivot language","Linguistic performance","Orthology (language)","Origin of speech","Obviative","Nonsense word","Natural language","Musivisual language","Metafunction","Logos","List of languages in the Eurovision Song Contest","List of language subsystems","List of European countries by population","List of countries where French is an official language","Linguistics","Linguistic Imperialism","Language preservation","Language of mathematics","Language complexity","Portal:Language","Langmaker","Gagnepain Jean","International Congress of Linguists","Intensifier","Information and media literacy","User talk:Great Dictionary",
+			"Fluency","First language","Feature geometry","Evolutionary psychology of language","Escagraph","Portal:English","Dialect","Cultural emphasis","Constructed language","Common English usage misconceptions","Closed-ended question","Bzzzpeek","Artificial language","Ambiguities in Chinese character simplification","Language",}
+}

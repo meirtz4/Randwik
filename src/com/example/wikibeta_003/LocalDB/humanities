@@ -1,0 +1,10 @@
+package com.example.wikibeta_003.LocalDB;
+public class humanities extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"World community","Vorlage","Urtext","UCL Centre for Digital Humanities","Transparency (behavior)","Tragicomedy","Tragedy","The Word and the World","THATCamp","Text Encoding Initiative","Stand-up tragedy","Somatic theory","Society for Digital Humanities","School of Letters","Satire","Romance studies","Public humanities","Portal:Philosophy","Packard Humanities Institute","Organizational communication","Oral tradition","Open Humanities Press","National Endowment for the Humanities","Missouri Humanities Council","Variantology","Media studies","Maine Humanities Council","Literature","Literary nonsense","List of people considered a founder in a Humanities field","Linguistics","Linguistic turn","Library science","Law","Karl Jaspers Society of North America","Intellectual history","Integrated human studies","Institute for Advanced Technology in the Humanities","Humanities in the United States","Humanist (electronic seminar)","Hprints","History by period","Health humanities","HASTAC","Global intellectual history","German Studies Association","German studies","Geisteswissenschaft","Futures of American Studies","Feature geometry",
+			"European studies","European Culture and Economy","Department of Musicology (Palacký University, Faculty of Philosophy)","Consortium of Humanities Centers and Institutes","Commonwealth of World Citizens","Collegium Artium","Classics","Chorography","Celtic studies","Canadian Association for Irish Studies","Caucasology","Austrian Studies Association","Association for Computers and the Humanities","Arts and Humanities Research Council","Arts and Humanities Data Service","Art history","Area studies","Archive of Performances of Greek and Roman Drama","Alliance of Digital Humanities Organizations","The Commission on the Humanities and Social Sciences","Outline of the humanities","Humanities Indicators","Humanities",}
+}

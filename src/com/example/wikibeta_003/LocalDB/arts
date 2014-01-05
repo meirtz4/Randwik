@@ -1,0 +1,10 @@
+package com.example.wikibeta_003.LocalDB;
+public class arts extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"Zone-H","Yulem","Useful art","Theme (arts)","The Spirit Room (Fargo, North Dakota)","The Painted Verse","Suleymans Eagle","Studio","Stendhal syndrome","Spirit of place","Spello's Infiorate","Social Practice","Social artistry","Showpiece","Sedition art","Art school","Pounce (art)","Poet as legislator","Patronage","Neolithic and Bronze Age rock art in the British Isles","Mural","Mill scale","Kwikdesk","Jerusalem Center for the Visual Arts","Jealousy in art","The Invention of Art: A Cultural History","International Peace Belt","Interdisciplinary arts","Human figure (aesthetics)","High culture","Gifted art","Genre-busting","Galerie Birch","Fine art","Favela Painting","Economics of the arts and literature","Design","Defacement (vandalism)","Cultural resources management","Creative arts","Context art","Community arts","Carving","Biennial of the Americas","Charles Biederman","Bibliography of encyclopedias: art and artists","AVANT","Arts criticism","The arts and politics","Arts and letters",
+			"Artistic merit","Artistic license","Artist's portfolio","Artist's impression","Arti Sacrum","Artes Mechanicae","Art world","Art and Design Admissions Registry","Art and culture law","Anthropotechnic","Alterazioni Video","Aesthetic relativism","Acknowledgment (creative arts and sciences)","Portal:Arts","Artist","Portal:Contents/Culture and the arts","Work of art","The arts","Art",}
+}

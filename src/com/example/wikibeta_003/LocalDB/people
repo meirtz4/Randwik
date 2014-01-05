@@ -1,0 +1,9 @@
+package com.example.wikibeta_003.LocalDB;
+public class people extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"User:Lonjing","Portal:Contents/People and self","Person","People",}
+}

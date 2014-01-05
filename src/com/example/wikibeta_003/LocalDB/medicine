@@ -1,0 +1,10 @@
+package com.example.wikibeta_003.LocalDB;
+public class medicine extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"Tamponade","Systems medicine","Subjective report","Spontaneous remission","Search activity concept","Scientific medicine","Reproductive-cell cycle theory","Remote guidance","Receptor editing","Quackademic medicine","Pulmonary function testing","Pseudohypoxia","Protein nitrogen unit","ProP (transporter)","Point-of-care documentation","Point of care","Photoprotection","Personal medicine","Clinical peer review","Neurological reparative therapy","Monitoring (medicine)","Minimally disruptive medicine","Microsphere","Metals in medicine","Medicine chest","Medical uses of silver","Medical simulation","Medical privacy","Medical narcissism","Medical harm","Medical gas therapy","Medical findings","Medical certificate","Medical biology","List of exercise prescription software","Lifestyle medicine","Life support","Last offices","In silico medicine","Human biology","Health fair","Health effects of 3D","Hazard Communication Standard","Functional residual capacity","Exercise prescription software","Exercise prescription","Evolutionary medicine","Drug of last resort","Doctor's visit","Disease",
+			"Dill oil","Cyberdoc","Cure","Curative care","Covert medication","Chloragogen cell","Blood plasma fractionation","Biomonitoring","Biomedical waste","Balanced salt solution","Antireticular cytotoxic serum","Portal:Anatomy","Aesthesiography","Academic medicine","Portal:Medicine","Outline of medicine","Medicine",}
+}

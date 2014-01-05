@@ -1,0 +1,9 @@
+package com.example.wikibeta_003.LocalDB;
+public class history extends AbstractCategory {
+	@Override
+	public String[] getListOfArticlesNames() {
+		return listOfArticlesNames;
+	}
+
+		protected static String[] listOfArticlesNames = {"Urania Propitia","United States presidential election in Minnesota, 1908","Transformation of culture","Saldae","Recorded history","Psychohistory","Protoscholastic writing","Professionalization and institutionalization of history","Popular history","Parachronism","Nationalization of history","Memory hole","Medieval cities of Albania","Macro-historical","Lost history","Local history","Internal passport","Intellectual history","History by period","Portal:History","Historicity (philosophy)","Historical sociology","Historical figure","Comparative historical research","List of historical classifications","Historic monument","Elegant decay","Chronology","Body politic","Balambika","Ash heap of history","Antiquarian","Anatopism","Anachronism","Outline of history","Glossary of history","Portal:Contents/History and events","Schools of history","Index of history articles","History",}
+}
