@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class science extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"Torsion field (pseudoscience)","The Manga Guides","Semicircle law (Quantum Hall)","Science slam","Science Iran","Regulatory science","Pondicherry Science Forum","Phenomenon","Outline of science","Morality of science","Ministry of Science","Metagenomics: An Alternative Approach to Genomics","List of science and technology articles by continent","User:Khamar","Isotope dilution","History of science","Golden Goose Award","Goethean science","Fudge factor","Femto-photography","Exact science","Energy Efficiency in Agriculture","Economics of science","DEPT (medicine)","Dekalb Academy of Technology and Environment","Criticism of science","Branches of science","Paul Bottomley (scientist)","Biological computation","Behavior-based safety","Animal welfare science","Natural science","Portal:Science","Science",}
-}

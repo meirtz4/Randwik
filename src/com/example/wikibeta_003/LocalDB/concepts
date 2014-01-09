@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class concepts extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"Word","Theory (mathematical logic)","Theory","Terminology model","Technoculture","Symbol","Stage","Situation","Scene","Prototype theory","Principle","Political myth","Policy switch","Polar concept argument","Paradigm (disambiguation)","Organizing principle","One-off","Object of the mind","Notion (philosophy)","Nonsense","Conceptual model","Mental image","Meme pool","Liberature","Knowledge arena","Jurisprudence of concepts","Idea networking","Guard ring","Event (philosophy)","Emotion","Dehellenization","Definitionism","Conceptual schema","Conceptual necessity","Concept map","Concept driven strategy","Category of being","Category (Kant)","Belief","Abstract and concrete","Concept",}
-}

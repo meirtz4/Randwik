@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class society extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"Unpopularity","Transition scenario","T.H. Marshall's Social Citizenship","Stateless society","Social intelligence","Social commentary","Social colony","Social citizenship","Social aims and policies","Sexualization","Risk society","Postfeminism","Popularity","Politics","Planetary consciousness","Pastoral society","Parallel society","Outline of public affairs","Knowledge assessment methodology","Just society","Internal passport","Indovation","Habitat for Hope","Geographical segregation","Fifth Estate","Contemporary society","Civilization","Civil society","Asociality","Portal:Contents/Society and social sciences","Portal:Society","Outline of society","Society",}
-}

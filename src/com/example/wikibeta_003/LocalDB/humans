@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class humans extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"Human variability","Transhuman","Superhuman","Sex differences in humans","Human self-reflection","Human scale","Rational animal","Rational agent","PtERV1","Planet of the Apemen","Person","People","Negative capability","Man (word)","Human Proteinpedia","Human nature","Human figure (aesthetics)","Human ethology","Human body temperature","Homo sapiens","Homo faber","Holocene extinction","Human genome","Human genetics","Eve's footprint","Anthropocentrism","Human development (biology)","Cyborg Foundation","Cyborg","Child","Body water","Human biology","Biological anthropology","Basic rest activity cycle","Beginning of human personhood","Bairn","Artificiality","Archaic humans","Anatomically modern humans","Amusement","List of alternative names for the human species","Human",}
-}

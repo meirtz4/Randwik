@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class sports extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"US Lacrosse","The Extreme Sport Challenges Association","Snitch (quidditch)","List of professional sports leagues by revenue","Hav","Sport",}
-}

@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class mathematics extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"Timeline of women in mathematics worldwide","Timeline of women in mathematics in America","The Manga Guides","Segal–Bargmann space","Isotypical representation","Institute of Mathematical Sciences (Spain)","Cholesky","Portal:Contents/Mathematics and logic","Mathematics",}
-}

@@ -1,9 +1,0 @@
-package com.example.wikibeta_003.LocalDB;
-public class nature extends AbstractCategory {
-	@Override
-	public String[] getListOfArticlesNames() {
-		return listOfArticlesNames;
-	}
-
-		protected static String[] listOfArticlesNames = {"Preternatural","Physis","Patterns in nature","Natural landscape","User:Lonjing","Ecosystem Health","Dim Effect","Balance of nature","Aesthetics of nature","Nature",}
-}
