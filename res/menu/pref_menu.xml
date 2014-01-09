@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
         <item 
-        android:title="Preferences"
-        android:id="@+id/preferences"/>
+        android:title="Topics"
+        android:id="@+id/topics"/>
         
         <item 
-        android:title="Exit"
-        android:id="@+id/exit"/>
+        android:title="About"
+        android:id="@+id/about"/>
 </menu>

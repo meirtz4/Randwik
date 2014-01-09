@@ -60,6 +60,7 @@ public class Manager extends Activity {
 	/* View Elements */
 	Button buttonGetRandomWikiPage;
 	Button buttonGoBack;
+	Button buttonPref;
 	WebView webViewMain;
 
 
@@ -93,12 +94,12 @@ public class Manager extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
-		case R.id.preferences:
+		case R.id.topics:
 			Intent p = new Intent("android.intent.action.PREFS");
 			startActivity(p);			
 			break;
-		case R.id.exit:
-			finish();
+		case R.id.about:
+
 			break;
 		}
 		return false;
@@ -108,6 +109,7 @@ public class Manager extends Activity {
 		webViewMain = (WebView) findViewById(R.id.wvBrowser);
 		buttonGetRandomWikiPage = (Button) findViewById(R.id.randWiki);
 		buttonGoBack = (Button) findViewById(R.id.back);
+		buttonPref = (Button) findViewById(R.id.bPref);
 
 		/***
 		 * The WebView has a know issue that the function onPageFinished is invoked
@@ -168,6 +170,13 @@ public class Manager extends Activity {
 				synchronized (waitForNextRun) {
 					waitForNextRun.notifyAll();
 				}
+			}
+		});
+		
+		buttonPref.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openOptionsMenu(); 
 			}
 		});
 	}
