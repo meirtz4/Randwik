@@ -12,22 +12,25 @@
         android:weightSum="6" >
 
         <Button
-            android:id="@+id/randWiki"
-            style="@android:style/ButtonBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="Get Another Article"
-            android:textSize="12dip" />
-
-        <Button
             android:id="@+id/back"
             style="@android:style/ButtonBar"
-            android:layout_width="match_parent"
+            android:layout_width="107dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="Go Back!" />
+            android:text="Back" />
 
+        <Button
+            android:id="@+id/randWiki"
+            style="@android:style/ButtonBar"
+            android:layout_width="107dp"
+            android:layout_height="match_parent"
+            android:text="Get Article" />
+
+        <Button
+            android:id="@+id/bPref"
+            style="@android:style/ButtonBar"
+            android:layout_width="107dp"
+            android:layout_height="match_parent"
+            android:text="Preferences" />
     </LinearLayout>
 
     <WebView
