@@ -3,11 +3,11 @@
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="technology"
+        android:key="Technology"
         android:title="Technology" />
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="science"
+        android:key="Science"
         android:title="Science" />
 
 </PreferenceScreen>

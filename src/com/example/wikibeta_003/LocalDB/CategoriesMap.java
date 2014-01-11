@@ -26,6 +26,7 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 	 */
 	private static final long serialVersionUID = 1L;
 	private static CategoriesMap singleCategoriesMap = null;
+	String[] listOfCategories;
 
 	protected CategoriesMap(){
 		/*******************************************/
@@ -60,8 +61,10 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 
 	private void initCategories() {
 		int initCounter = 0;
+		listOfCategories = new String[this.size()];
 		/* Go over all the categories and set them their given names */
 		for(Entry<String, AbstractCategory> entry : this.entrySet()){
+			listOfCategories[initCounter] = entry.getKey();
 			entry.getValue().setCatagoryName(entry.getKey());
 			initCounter++;
 		}
@@ -79,6 +82,11 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 		Random random = new Random();
 		String choosenOne = catagories[random.nextInt(catagories.length)];
 		return this.get(choosenOne);
+	}
+
+	@Override
+	public String[] getAllCategoriesStrings() {
+		return listOfCategories;
 	}
 }
 

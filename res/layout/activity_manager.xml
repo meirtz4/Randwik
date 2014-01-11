@@ -13,21 +13,21 @@
 
         <Button
             android:id="@+id/back"
-            style="@android:style/ButtonBar"
+            style="@android:style/MediaButton"
             android:layout_width="107dp"
             android:layout_height="match_parent"
             android:text="Back" />
 
         <Button
             android:id="@+id/randWiki"
-            style="@android:style/ButtonBar"
+            style="@android:style/MediaButton"
             android:layout_width="107dp"
             android:layout_height="match_parent"
             android:text="Get Article" />
 
         <Button
             android:id="@+id/bPref"
-            style="@android:style/ButtonBar"
+            style="@android:style/MediaButton"
             android:layout_width="107dp"
             android:layout_height="match_parent"
             android:text="Preferences" />

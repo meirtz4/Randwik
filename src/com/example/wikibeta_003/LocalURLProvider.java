@@ -42,7 +42,7 @@ public class LocalURLProvider implements IURLProvider{
 		String URLToReturn, choosenPage;
 		Boolean pageAlreadyVisited = true;
 		try {
-			/* Chose a category out of the possibilities of the user */
+			/* Choose a category out of the possibilities of the user */
 			ICategoryListOfArticles choosenCatagory = categoryDB.getRandomCategoryFromAList(catagories);
 			Log.e("LocalURLProvider", "Choosen category is - " + choosenCatagory.getCatagoryName());
 			do {

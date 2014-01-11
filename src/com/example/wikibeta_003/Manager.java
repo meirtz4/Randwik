@@ -7,16 +7,22 @@
 
 package com.example.wikibeta_003;
 
+import java.util.ArrayList;
 import java.util.Stack;
 import com.example.wikibeta_003.R;
 import com.example.wikibeta_003.Interfaces.IURLProvider;
+import com.example.wikibeta_003.LocalDB.CategoriesMap;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.util.Log;
+import android.util.Log; 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +40,8 @@ public class Manager extends Activity {
 	IURLProvider provider = LocalURLProvider.getURLProvider();
 
 	/* TODO! Remove this when we can get the chosen categories from the user */
-	private static String[] currentCategories = {"Nature"};
+	private static ArrayList<String> currentCategoriesList = new ArrayList<String>();
+	private static String[] currentCategories;
 
 	/* Local thread that load the page */
 	PageLoader loader = new PageLoader();
@@ -96,10 +103,9 @@ public class Manager extends Activity {
 		switch(item.getItemId()) {
 		case R.id.topics:
 			Intent p = new Intent("android.intent.action.PREFS");
-			startActivity(p);			
+			startActivity(p);
 			break;
 		case R.id.about:
-
 			break;
 		}
 		return false;
@@ -172,13 +178,38 @@ public class Manager extends Activity {
 				}
 			}
 		});
-		
+
 		buttonPref.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openOptionsMenu(); 
 			}
 		});
+	}
+
+	// TODO - Check how to ger the prefs
+	private boolean fillCurrentCategories() {
+		SharedPreferences topicData = PreferenceManager.getDefaultSharedPreferences(this);
+		CategoriesMap catMap = CategoriesMap.getCategoriesMap();
+		for (String cat : catMap.getAllCategoriesStrings()){
+			boolean value = topicData.getBoolean(cat, false);
+			if (value){
+				currentCategoriesList.add(cat);
+			}
+		}
+
+		if (currentCategoriesList.size() == 0){
+			Log.e("fillCurrentCategories","currentCategories is EMPTY!");
+			return false;
+		}
+
+		currentCategories = currentCategoriesList.toArray(currentCategories);
+
+		// Temp for debug Please remove
+		for (String s : currentCategories)
+			Log.e("currentCategories",s);
+
+		return true;
 	}
 
 
@@ -223,18 +254,22 @@ public class Manager extends Activity {
 				else{ 
 					if (!lastPageForStack.equals(""))
 						previousPages.push(lastPageForStack);
-					/* Here we get the page link from the provider */
-					pageLink = provider.getRandomPage(currentCategories, previousPages);
+
+					if (!fillCurrentCategories())
+						pageLink = (new SimpleURLProvider().getRandomPage(null, previousPages));
+					else /* Here we get the page link from the provider */
+						pageLink = provider.getRandomPage(currentCategories, previousPages);
+
 					lastPageForStack = pageLink;
 				}
 				Log.e("Got page link", pageLink);
-				
+
 				/* Loading the page */
 				webViewMain.loadUrl(pageLink);
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}	
+		}
 	}  
 }
