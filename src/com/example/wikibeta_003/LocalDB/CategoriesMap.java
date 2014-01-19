@@ -52,9 +52,12 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 		this.put("Politics", new PoliticsCategory());
 		this.put("People", new PeopleCategory());
 		this.put("Technology", new TechnologyCategory());
-
-		/* "Agriculture","Arts","Belief","Business","Culture","Environment","History","Humanities","Humans","Language","Law","Life",
-		"Mathematics","Medicine","Nature","Society","Science","Politics","People","Technology" */
+		this.put("Concepts", new ConceptsCategory());
+		this.put("Education", new EducationCategory());
+		this.put("Geography", new GeographyCategory());
+		this.put("Health", new HealthCategory());
+		this.put("Sports", new SportsCategory());
+		this.put("Chronology", new ChronologyCategory());
 		/*******************************************/
 		initCategories();
 	}
