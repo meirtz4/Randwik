@@ -14,8 +14,6 @@ import com.example.wikibeta_003.Interfaces.IURLProvider;
 import com.example.wikibeta_003.LocalDB.CategoriesMap;
 
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -39,7 +37,7 @@ public class Manager extends Activity {
 	//IURLProvider provider = SimpleURLProvider.getURLProvider(); 
 	IURLProvider provider = LocalURLProvider.getURLProvider();
 
-	/* TODO! Remove this when we can get the chosen categories from the user */
+	/* For the chosen categories from the user */
 	private static ArrayList<String> currentCategoriesList = new ArrayList<String>();
 	private static String[] currentCategories;
 
@@ -91,7 +89,7 @@ public class Manager extends Activity {
 		loadingWindow.show();
 	}
 
-	/* TODO! Create the option menu */
+	/* Create the option menu */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pref_menu, menu);
@@ -187,7 +185,7 @@ public class Manager extends Activity {
 		});
 	}
 
-	// TODO - Check how to ger the prefs
+	/* Get categories from the topics list */
 	private boolean fillCurrentCategories() {
 		SharedPreferences topicData = PreferenceManager.getDefaultSharedPreferences(this);
 		CategoriesMap catMap = CategoriesMap.getCategoriesMap();
@@ -205,10 +203,6 @@ public class Manager extends Activity {
 		}
 
 		currentCategories = currentCategoriesList.toArray(new String[] {}); 
-
-		// Temp for debug Please remove
-		for (String s : currentCategories)
-			Log.e("currentCategories",s);
 
 		return true;
 	}

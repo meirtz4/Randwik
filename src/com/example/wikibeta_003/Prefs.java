@@ -1,3 +1,7 @@
+/**
+ * TODO! add comments to this class
+ */
+
 package com.example.wikibeta_003;
 
 import android.annotation.TargetApi;
@@ -7,7 +11,7 @@ import android.preference.PreferenceFragment;
 
 public class Prefs extends PreferenceActivity {
 
-	private static int prefs=R.xml.prefs;
+	private static int prefs=R.xml.topics;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
@@ -40,7 +44,7 @@ public class Prefs extends PreferenceActivity {
 		public void onCreate(final Bundle savedInstanceState)
 		{
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.prefs);
+			addPreferencesFromResource(R.xml.topics);
 		}
 	}
 }
