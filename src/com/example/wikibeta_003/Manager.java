@@ -191,6 +191,7 @@ public class Manager extends Activity {
 	private boolean fillCurrentCategories() {
 		SharedPreferences topicData = PreferenceManager.getDefaultSharedPreferences(this);
 		CategoriesMap catMap = CategoriesMap.getCategoriesMap();
+		currentCategoriesList.clear();
 		for (String cat : catMap.getAllCategoriesStrings()){
 			boolean value = topicData.getBoolean(cat, false);
 			if (value){
@@ -203,7 +204,7 @@ public class Manager extends Activity {
 			return false;
 		}
 
-		currentCategories = currentCategoriesList.toArray(currentCategories);
+		currentCategories = currentCategoriesList.toArray(new String[] {}); 
 
 		// Temp for debug Please remove
 		for (String s : currentCategories)
@@ -255,10 +256,13 @@ public class Manager extends Activity {
 					if (!lastPageForStack.equals(""))
 						previousPages.push(lastPageForStack);
 
-					if (!fillCurrentCategories())
+					if (!fillCurrentCategories()) {
 						pageLink = (new SimpleURLProvider().getRandomPage(null, previousPages));
-					else /* Here we get the page link from the provider */
+						Log.e("Getting random page",pageLink);
+					} else {/* Here we get the page link from the provider */
 						pageLink = provider.getRandomPage(currentCategories, previousPages);
+						Log.e("Getting page from categories",pageLink);
+					}
 
 					lastPageForStack = pageLink;
 				}

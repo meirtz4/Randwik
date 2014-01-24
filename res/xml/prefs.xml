@@ -9,5 +9,8 @@
         android:defaultValue="true"
         android:key="Science"
         android:title="Science" />
-
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="History"
+        android:title="History" />
 </PreferenceScreen>
