@@ -77,7 +77,6 @@ public class Manager extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_manager);
 		setTopBar();
 		showLoadingWindow();
 		setViewElements();
@@ -88,11 +87,13 @@ public class Manager extends Activity {
 	private void setTopBar() {
 		/* Set view by API */
 		if (Utils.getUtils().isAPIAbove11()){
+			setContentView(R.layout.activity_manager);
 			LinearLayout buttonsLayout = (LinearLayout) findViewById(R.id.buttonsLayout);
 			buttonsLayout.setVisibility(LinearLayout.GONE);
 		}
 		else {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			setContentView(R.layout.activity_manager);
 		}
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
