@@ -6,31 +6,30 @@
     android:weightSum="6" >
 
     <LinearLayout
+        android:id="@+id/buttonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="6" >
 
         <Button
-            android:id="@+id/back"
-            style="@android:style/MediaButton"
-            android:layout_width="107dp"
-            android:layout_height="match_parent"
-            android:text="Back" />
+            android:id="@+id/bBack"
+            android:layout_width="70dp"
+            android:layout_height="55dp"
+            android:text="@string/bBack" />
 
         <Button
-            android:id="@+id/randWiki"
-            style="@android:style/MediaButton"
-            android:layout_width="107dp"
-            android:layout_height="match_parent"
-            android:text="Get Article" />
+            android:id="@+id/bRandWiki"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
+            android:text="@string/bRandWiki" />
 
-        <Button
+        <ImageButton
             android:id="@+id/bPref"
-            style="@android:style/MediaButton"
-            android:layout_width="107dp"
-            android:layout_height="match_parent"
-            android:text="Preferences" />
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:contentDescription="@string/bPref"
+            android:src="@drawable/pref_button" />
     </LinearLayout>
 
     <WebView

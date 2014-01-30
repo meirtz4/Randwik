@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-        <item 
-        android:title="Topics"
-        android:id="@+id/topics"/>
-        
-        <item 
-        android:title="About"
-        android:id="@+id/about"/>
+    <item
+        android:id="@+id/topics"
+        android:title="@string/Topics"/>
+    <item
+        android:id="@+id/about"
+        android:title="@string/About"/>
+    <item
+        android:id="@+id/ACIback"
+        android:title="@string/bBack"
+        android:icon="@drawable/back_icon"
+        android:showAsAction="always"/>
+    <item
+        android:id="@+id/ACIgetArticle"
+        android:title="@string/bRandWiki"
+        android:icon="@drawable/black_wikipedia_icon"
+        android:showAsAction="always"/>
+
 </menu>
