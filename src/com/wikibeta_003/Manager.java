@@ -23,6 +23,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.util.Log; 
 import android.view.Menu;
@@ -61,7 +62,7 @@ public class Manager extends Activity {
 	/* Both boolean variables are used to solve the double URL load issue (detailed below) */
 	boolean loadingFinished = true;
 	boolean redirect = false;
-
+	
 	ProgressDialog loadingWindow = null;
 
 	/* Objects used for thread to wait */
@@ -77,11 +78,10 @@ public class Manager extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTopBar();
-		showLoadingWindow();
-		setViewElements();
-		loader.start();
-
+			setTopBar();
+			showLoadingWindow();
+			setViewElements();
+			loader.start();
 	}
 
 	private void setTopBar() {
@@ -95,9 +95,9 @@ public class Manager extends Activity {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.activity_manager);
 		}
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
+	
 	protected void showLoadingWindow(){
 		doneLoadingPage = false;
 		loadingWindow = new ProgressDialog(Manager.this);
@@ -105,14 +105,13 @@ public class Manager extends Activity {
 		loadingWindow.setMessage("");
 		loadingWindow.show();
 	}
-
+	
 	/* Create the option menu */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pref_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
