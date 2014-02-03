@@ -8,7 +8,6 @@
 package com.wikibeta_003;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import com.wikibeta_003.R;
 import com.wikibeta_003.Interfaces.IURLProvider;
@@ -18,12 +17,9 @@ import Utils.Utils;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.util.Log; 
 import android.view.Menu;
@@ -31,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -51,18 +46,14 @@ public class Manager extends Activity {
 	/* Local thread that load the page */
 	PageLoader loader = new PageLoader();
 
-	/* Stack for saving previous pages,
-	 * lastPageForStack is to save the current page when getting a new one */
-	private Stack<String> previousPages = new Stack<String>();
-	String lastPageForStack = "";
+	String currentPage;
 
-	boolean backButtonClicked = false;
 	boolean doneLoadingPage = false;
 
 	/* Both boolean variables are used to solve the double URL load issue (detailed below) */
 	boolean loadingFinished = true;
 	boolean redirect = false;
-	
+
 	ProgressDialog loadingWindow = null;
 
 	/* Objects used for thread to wait */
@@ -71,17 +62,16 @@ public class Manager extends Activity {
 
 	/* View Elements */
 	Button buttonGetRandomWikiPage;
-	Button buttonGoBack;
 	ImageButton buttonPref;
 	WebView webViewMain;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-			setTopBar();
-			showLoadingWindow();
-			setViewElements();
-			loader.start();
+		setTopBar();
+		showLoadingWindow();
+		setViewElements();
+		loader.start();
 	}
 
 	private void setTopBar() {
@@ -97,7 +87,7 @@ public class Manager extends Activity {
 		}
 	}
 
-	
+
 	protected void showLoadingWindow(){
 		doneLoadingPage = false;
 		loadingWindow = new ProgressDialog(Manager.this);
@@ -105,13 +95,14 @@ public class Manager extends Activity {
 		loadingWindow.setMessage("");
 		loadingWindow.show();
 	}
-	
+
 	/* Create the option menu */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pref_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
@@ -124,21 +115,16 @@ public class Manager extends Activity {
 		case R.id.ACIgetArticle:
 			getButtonClicked();
 			break;
-		case R.id.ACIback:
-			backButtonClicked();
-			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	protected void backButtonClicked(){
-		if (previousPages.isEmpty())
-			return;
-		backButtonClicked = true;
-		showLoadingWindow();
-		synchronized (waitForNextRun) {
-			waitForNextRun.notifyAll();
-		}	
+		if (webViewMain.canGoBack()){
+			webViewMain.goBack();
+			Log.e("WebView - Back to: ", webViewMain.getUrl());
+		}
+		else finish();
 	}
 
 	protected void getButtonClicked(){
@@ -151,7 +137,6 @@ public class Manager extends Activity {
 	private void setViewElements() {
 		webViewMain = (WebView) findViewById(R.id.wvBrowser);
 		buttonGetRandomWikiPage = (Button) findViewById(R.id.bRandWiki);
-		buttonGoBack = (Button) findViewById(R.id.bBack);
 		buttonPref = (ImageButton) findViewById(R.id.bPref);
 
 		/***
@@ -200,13 +185,6 @@ public class Manager extends Activity {
 			}
 		});
 
-		buttonGoBack.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				backButtonClicked();
-			}
-		});
-
 		buttonPref.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -239,25 +217,7 @@ public class Manager extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Exit Wikrand");
-		builder.setMessage("Are You Sure?");
-
-		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				finish();
-			}
-		});
-
-		builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
+		backButtonClicked();
 	}
 
 
@@ -273,7 +233,6 @@ public class Manager extends Activity {
 			while (true) {
 				loadPage();
 				doneLoading();
-				backButtonClicked = false;
 				synchronized (waitForNextRun) {
 					try {
 						waitForNextRun.wait();
@@ -299,24 +258,15 @@ public class Manager extends Activity {
 		private void loadPage(){
 			try {
 				String pageLink;
-				if (backButtonClicked){
-					pageLink = previousPages.pop();
-				}
-				else{ 
-					if (!lastPageForStack.equals(""))
-						previousPages.push(lastPageForStack);
-
-					if (!fillCurrentCategories()) {
-						pageLink = (new SimpleURLProvider().getRandomPage(null, previousPages));
-						Log.e("Getting random page",pageLink);
-					} else {/* Here we get the page link from the provider */
-						pageLink = provider.getRandomPage(currentCategories, previousPages);
-						Log.e("Getting page from categories",pageLink);
-					}
-
-					lastPageForStack = pageLink;
+				if (!fillCurrentCategories()) {
+					pageLink = (new SimpleURLProvider().getRandomPage(null, null));
+					Log.e("Getting random page",pageLink);
+				} else {/* Here we get the page link from the provider */
+					pageLink = provider.getRandomPage(currentCategories, null);
+					Log.e("Getting page from categories",pageLink);
 				}
 				Log.e("Got page link", pageLink);
+				currentPage = pageLink;
 
 				/* Loading the page */
 				webViewMain.loadUrl(pageLink);

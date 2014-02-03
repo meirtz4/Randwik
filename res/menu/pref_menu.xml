@@ -8,11 +8,6 @@
         android:id="@+id/about"
         android:title="@string/About"/>
     <item
-        android:id="@+id/ACIback"
-        android:title="@string/bBack"
-        android:icon="@drawable/back_icon"
-        android:showAsAction="always"/>
-    <item
         android:id="@+id/ACIgetArticle"
         android:title="@string/bRandWiki"
         android:icon="@drawable/black_wikipedia_icon"

@@ -13,14 +13,8 @@
         android:weightSum="6" >
 
         <Button
-            android:id="@+id/bBack"
-            android:layout_width="70dp"
-            android:layout_height="55dp"
-            android:text="@string/bBack" />
-
-        <Button
             android:id="@+id/bRandWiki"
-            android:layout_width="200dp"
+            android:layout_width="260dp"
             android:layout_height="55dp"
             android:text="@string/bRandWiki" />
 
