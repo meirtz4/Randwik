@@ -49,7 +49,7 @@ public class LocalURLProvider implements IURLProvider{
 				/* Get a random article from the category */
 				choosenPage = choosenCatagory.getRandomArticle(false);
 				/* Make sure the page is not in the previous pages stack - please suggest a better solution for that */
-				if (previousPages.search(choosenPage) < 0) 
+				if (previousPages==null || previousPages.search(choosenPage) < 0) 
 				{
 					pageAlreadyVisited = false;
 				}
