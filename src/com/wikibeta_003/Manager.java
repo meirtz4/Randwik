@@ -9,6 +9,9 @@ package com.wikibeta_003;
 
 import java.util.ArrayList;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 import com.wikibeta_003.R;
 import com.wikibeta_003.Interfaces.IURLProvider;
 import com.wikibeta_003.LocalDB.CategoriesMap;
@@ -22,6 +25,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.util.Log; 
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +68,7 @@ public class Manager extends Activity {
 	Button buttonGetRandomWikiPage;
 	ImageButton buttonPref;
 	WebView webViewMain;
+	LinearLayout layout;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,12 @@ public class Manager extends Activity {
 		setTopBar();
 		showLoadingWindow();
 		setViewElements();
+		
+		layout = (LinearLayout) findViewById(R.id.loMain);
+		AdView ad = new AdView(this, AdSize.BANNER, "ca-app-pub-xxxxxxxxxxxxxxxxxxx");
+		layout.addView(ad);
+		ad.loadAd(new AdRequest()); 
+		
 		loader.start();
 	}
 
