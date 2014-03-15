@@ -50,8 +50,13 @@ public class Manager extends Activity {
 	/* Local thread that load the page */
 	PageLoader loader = new PageLoader();
 
+	/* Publisher id for google AdMob */
+	private static String PUBLISHER_ID = "ca-app-pub-xxxxxxxxxxxxxxxxxxx";
+	
+	/* Hold the current page the user is at */
 	String currentPage;
-
+	
+	/* Variable for indication about the loading window */
 	boolean doneLoadingPage = false;
 
 	/* Both boolean variables are used to solve the double URL load issue (detailed below) */
@@ -76,13 +81,16 @@ public class Manager extends Activity {
 		setTopBar();
 		showLoadingWindow();
 		setViewElements();
-		
+		loadAdView();
+
+		loader.start();
+	}
+
+	private void loadAdView() {
 		layout = (LinearLayout) findViewById(R.id.loMain);
-		AdView ad = new AdView(this, AdSize.BANNER, "ca-app-pub-xxxxxxxxxxxxxxxxxxx");
+		AdView ad = new AdView(this, AdSize.BANNER, PUBLISHER_ID);
 		layout.addView(ad);
 		ad.loadAd(new AdRequest()); 
-		
-		loader.start();
 	}
 
 	private void setTopBar() {
