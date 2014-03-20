@@ -1,6 +1,7 @@
 package Utils;
 
 import android.app.Activity;
+import android.os.Build;
 
 public class Utils extends Activity{
 
@@ -17,15 +18,20 @@ public class Utils extends Activity{
 	}
 	
 	public boolean isAPIBelow11(){
-		try {
-			getClass().getMethod("getFragmentManager");
-			return false;
-		} catch (NoSuchMethodException e) { //Api < 11
-			return true;
-		}
+		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB);
 	}
 	
-	public boolean isAPIAbove11(){
+	public boolean isAPIAboveAnd11(){
 		return !isAPIBelow11();
+	}
+
+	
+	public boolean isAPIBelow14(){
+		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
+	}
+	
+	
+	public boolean isAPIAboveAnd14(){
+		return !isAPIBelow14();
 	}
 }

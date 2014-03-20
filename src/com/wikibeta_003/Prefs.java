@@ -20,7 +20,7 @@ public class Prefs extends PreferenceActivity {
 	protected void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (Utils.getUtils().isAPIAbove11())
+		if (Utils.getUtils().isAPIAboveAnd11())
 			AddResourceApi11AndGreater();
 		else
 			AddResourceApiLessThan11();
