@@ -19,13 +19,13 @@ import com.wikibeta_003.LocalDB.CategoriesMap;
 import Utils.Utils;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.util.Log; 
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +36,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ShareActionProvider;
 
 public class Manager extends Activity {
 
@@ -44,18 +45,19 @@ public class Manager extends Activity {
 	IURLProvider provider = LocalURLProvider.getURLProvider();
 
 	/* For the chosen categories from the user */
-	private static ArrayList<String> currentCategoriesList = new ArrayList<String>();
-	private static String[] currentCategories;
+	protected static ArrayList<String> currentCategoriesList = new ArrayList<String>();
+	protected static String[] currentCategories;
 
 	/* Local thread that load the page */
 	PageLoader loader = new PageLoader();
 
 	/* Publisher id for google AdMob */
-	private static String PUBLISHER_ID = "ca-app-pub-xxxxxxxxxxxxxxxxxxx";
-	
+	protected static String PUBLISHER_ID = "ca-app-pub-xxxxxxxxxxxxxxxxxxx";
+
 	/* Hold the current page the user is at */
-	String currentPage;
-	
+	protected String currentPage;
+	protected String previousPage;
+
 	/* Variable for indication about the loading window */
 	boolean doneLoadingPage = false;
 
@@ -68,6 +70,9 @@ public class Manager extends Activity {
 	/* Objects used for thread to wait */
 	Object waitForFinishLoad = new Object();
 	Object waitForNextRun = new Object();
+
+	/* For share button */
+	protected ShareActionProvider shareActionProvider; 
 
 	/* View Elements */
 	Button buttonGetRandomWikiPage;
@@ -82,7 +87,6 @@ public class Manager extends Activity {
 		showLoadingWindow();
 		setViewElements();
 		loadAdView();
-
 		loader.start();
 	}
 
@@ -95,7 +99,7 @@ public class Manager extends Activity {
 
 	private void setTopBar() {
 		/* Set view by API */
-		if (Utils.getUtils().isAPIAbove11()){
+		if (Utils.getUtils().isAPIAboveAnd11()){
 			setContentView(R.layout.activity_manager);
 			LinearLayout buttonsLayout = (LinearLayout) findViewById(R.id.buttonsLayout);
 			buttonsLayout.setVisibility(LinearLayout.GONE);
@@ -115,10 +119,36 @@ public class Manager extends Activity {
 		loadingWindow.show();
 	}
 
+	@SuppressLint("NewApi")
+	private void updateIntent() {
+		runOnUiThread(new Runnable() {  
+			@Override
+			public void run() {
+				String textToSend = Utils.getUtils().createShareString(currentPage);
+				Intent sendIntent = new Intent();
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_TEXT, textToSend);
+				sendIntent.setType("text/plain");
+				if(Utils.getUtils().isAPIAboveAnd14()){
+					if (shareActionProvider!=null)
+						shareActionProvider.setShareIntent(sendIntent);
+				}else {
+					startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.bShare)));
+				}
+			}
+		});
+	}
+
 	/* Create the option menu */
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pref_menu, menu);
+		if(Utils.getUtils().isAPIAboveAnd14()){
+			MenuItem item = menu.findItem(R.id.ACIshareArticle);
+			shareActionProvider = (ShareActionProvider) item.getActionProvider();
+		}
+		updateIntent();
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -141,7 +171,9 @@ public class Manager extends Activity {
 	protected void backButtonClicked(){
 		if (webViewMain.canGoBack()){
 			webViewMain.goBack();
-			Log.e("WebView - Back to: ", webViewMain.getUrl());
+			Log.e("WebView - Back to: ", previousPage);
+			currentPage = previousPage;
+			updateIntent();
 		}
 		else finish();
 	}
@@ -240,6 +272,7 @@ public class Manager extends Activity {
 	}
 
 
+
 	/*********************
 	 * Thread PageLoader
 	 *********************/
@@ -284,8 +317,10 @@ public class Manager extends Activity {
 					pageLink = provider.getRandomPage(currentCategories, null);
 					Log.e("Getting page from categories",pageLink);
 				}
+				previousPage = currentPage;
 				Log.e("Got page link", pageLink);
 				currentPage = pageLink;
+				updateIntent();
 
 				/* Loading the page */
 				webViewMain.loadUrl(pageLink);

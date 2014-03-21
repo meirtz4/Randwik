@@ -9,8 +9,14 @@
         android:title="@string/About"/>
     <item
         android:id="@+id/ACIgetArticle"
-        android:title="@string/bRandWiki"
         android:icon="@drawable/black_wikipedia_icon"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:title="@string/bRandWiki"/>
+    <item
+        android:id="@+id/ACIshareArticle"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:icon="@drawable/ic_action_share"
+        android:showAsAction="always"
+        android:title="@string/bShare"/>
 
 </menu>

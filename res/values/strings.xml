@@ -8,5 +8,6 @@
     <string name="bPref">Preferences</string>
     <string name="Topics">Topics</string>
     <string name="About">About</string>
+    <string name="bShare">Share</string>
     
 </resources>
