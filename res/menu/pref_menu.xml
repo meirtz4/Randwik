@@ -3,10 +3,13 @@
 
     <item
         android:id="@+id/topics"
-        android:title="@string/Topics"/>
+        android:title="@string/bTopics"/>
     <item
         android:id="@+id/about"
-        android:title="@string/About"/>
+        android:title="@string/bAbout"/>
+    <item
+        android:id="@+id/exit"
+        android:title="@string/bExit"/>
     <item
         android:id="@+id/ACIgetArticle"
         android:icon="@drawable/transparent_wikipedia_icon"

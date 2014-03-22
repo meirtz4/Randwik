@@ -22,6 +22,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -168,6 +169,22 @@ public class Manager extends Activity {
 			break;
 		case R.id.ACIgetArticle:
 			getButtonClicked();
+			break;
+		case R.id.exit:
+			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+			        switch (which){
+			        case DialogInterface.BUTTON_POSITIVE:
+						finish();
+			            break;
+			        case DialogInterface.BUTTON_NEGATIVE:
+			            break;
+			        }
+			    }
+			};
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
 			break;
 		}
 		return super.onOptionsItemSelected(item);

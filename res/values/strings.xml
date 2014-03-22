@@ -6,8 +6,9 @@
     <string name="bBack">Back</string>
     <string name="bRandWiki">Get Random Article</string>
     <string name="bPref">Preferences</string>
-    <string name="Topics">Topics</string>
-    <string name="About">About</string>
+    <string name="bTopics">Topics</string>
+    <string name="bAbout">About</string>
     <string name="bShare">Share</string>
+    <string name="bExit">Exit...</string>
     
 </resources>
