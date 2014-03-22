@@ -9,7 +9,7 @@
         android:title="@string/About"/>
     <item
         android:id="@+id/ACIgetArticle"
-        android:icon="@drawable/black_wikipedia_icon"
+        android:icon="@drawable/transparent_wikipedia_icon"
         android:showAsAction="always"
         android:title="@string/bRandWiki"/>
     <item

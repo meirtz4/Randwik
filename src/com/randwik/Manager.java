@@ -163,6 +163,7 @@ public class Manager extends Activity {
 			AlertDialog.Builder dlgAbout = new AlertDialog.Builder(this);
 			dlgAbout.setMessage(Utils.getUtils().getAboutContent());
 			dlgAbout.setTitle(Utils.getUtils().getAboutTitle());
+			dlgAbout.setIcon(R.drawable.ic_launcher_mdpi);
 			dlgAbout.create().show();
 			break;
 		case R.id.ACIgetArticle:
