@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -159,6 +160,10 @@ public class Manager extends Activity {
 			startActivity(p);
 			break;
 		case R.id.about:
+			AlertDialog.Builder dlgAbout = new AlertDialog.Builder(this);
+			dlgAbout.setMessage(Utils.getUtils().getAboutContent());
+			dlgAbout.setTitle(Utils.getUtils().getAboutTitle());
+			dlgAbout.create().show();
 			break;
 		case R.id.ACIgetArticle:
 			getButtonClicked();
