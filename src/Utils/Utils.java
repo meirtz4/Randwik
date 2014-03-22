@@ -1,3 +1,9 @@
+/***
+ * 	Utils is an assitant class that returns data about the current API and handles strings for share content
+ * 	@author Meir Levy
+ *	@version 1.2
+ */
+
 package Utils;
 
 import android.app.Activity;
