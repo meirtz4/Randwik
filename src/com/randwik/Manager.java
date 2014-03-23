@@ -74,6 +74,7 @@ public class Manager extends Activity {
 
 	/* For share button */
 	protected ShareActionProvider shareActionProvider; 
+	protected Intent sendIntent;
 
 	/* View Elements */
 	Button buttonGetRandomWikiPage;
@@ -126,16 +127,13 @@ public class Manager extends Activity {
 			@Override
 			public void run() {
 				String textToSend = Utils.getUtils().createShareString(currentPage);
-				Intent sendIntent = new Intent();
+				sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_TEXT, textToSend);
 				sendIntent.setType("text/plain");
-				if(Utils.getUtils().isAPIAboveAnd14()){
+				if(Utils.getUtils().isAPIAboveAnd14())
 					if (shareActionProvider!=null)
 						shareActionProvider.setShareIntent(sendIntent);
-				}else {
-					startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.bShare)));
-				}
 			}
 		});
 	}
@@ -169,6 +167,9 @@ public class Manager extends Activity {
 			break;
 		case R.id.ACIgetArticle:
 			getButtonClicked();
+			break;
+		case R.id.ACIshareArticle:	
+			startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.bShare)));
 			break;
 		case R.id.exit:
 			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

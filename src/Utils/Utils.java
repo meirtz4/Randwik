@@ -22,6 +22,7 @@ public class Utils extends Activity{
 											"You can use Randwik to focus the search on your favourite subjects by marking them in Topics menu,\n" +
 											"You can also share the current article with your friends !\n\n" +
 											"Enjoy,\nFatboyD team,\n2014.";
+	protected static String ABOUT_CONTENT_LOW_API = "Enjoy, FatboyD team - 2014.";
 
 	protected Utils() {
 
@@ -61,6 +62,8 @@ public class Utils extends Activity{
 	}
 
 	public String getAboutContent() {
+		if (Utils.getUtils().isAPIBelow14())
+			return ABOUT_CONTENT_LOW_API;
 		return ABOUT_CONTENT;
 	}
 }
