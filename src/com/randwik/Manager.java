@@ -194,8 +194,10 @@ public class Manager extends Activity {
 	protected void backButtonClicked(){
 		if (webViewMain.canGoBack()){
 			webViewMain.goBack();
-			Log.e("WebView - Back to: ", previousPage);
-			currentPage = previousPage;
+			if (previousPage!=null){
+				Log.e("WebView - Back to: ", previousPage);
+				currentPage = previousPage;
+			}
 			updateIntent();
 		}
 		else finish();
