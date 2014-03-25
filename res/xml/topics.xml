@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Agriculture"
+        android:title="Agriculture" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="Arts"
-        android:title="Arts" />    
+        android:title="Arts" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="Business"
         android:title="Business" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Chronology"
+        android:title="Chronology" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Concepts"
+        android:title="Concepts" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Culture"
+        android:title="Culture" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Education"
+        android:title="Education" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="Environment"
@@ -26,8 +47,24 @@
         android:title="History" />
     <CheckBoxPreference
         android:defaultValue="false"
+        android:key="Humanities"
+        android:title="Humanities" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Humans"
+        android:title="Humans" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Language"
+        android:title="Language" />
+    <CheckBoxPreference
+        android:defaultValue="false"
         android:key="Law"
-        android:title="Law" />        
+        android:title="Law" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="Life"
+        android:title="Life" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="Mathematics"
@@ -40,6 +77,10 @@
         android:defaultValue="false"
         android:key="Nature"
         android:title="Nature" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="People"
+        android:title="People" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="Politics"
@@ -60,4 +101,5 @@
         android:defaultValue="false"
         android:key="Technology"
         android:title="Technology" />
+
 </PreferenceScreen>
