@@ -16,7 +16,7 @@ public class Utils extends Activity{
 	protected AlertDialog.Builder dlgAbout;
 	protected static String SHARE_TEXT = "Interesting Wikipedia Article from Randwik: ";
 	protected static String PAGE_NOTLOADED = "Page Not Loaded Yet... ";
-	protected static String ABOUT_TITLE = "Randwik 2.0";
+	protected static String ABOUT_TITLE = "Randwik 2.1";
 	protected static String ABOUT_CONTENT = "RandWik let's you enjoy in your free time from Wikipedia Articles.\n\n" +
 											"By tapping the W button Randwik will load you a random article\n" +
 											"You can use Randwik to focus the search on your favourite subjects by marking them in Topics menu,\n" +
