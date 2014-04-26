@@ -53,7 +53,7 @@ public class Utils extends Activity{
 	public String createShareString(String link){
 		if (link==null)
 			return PAGE_NOTLOADED;
-		String linkName = link.substring(link.lastIndexOf("/") + 1, link.length());
+		String linkName = getArticleNameFromLink(link);
 		return SHARE_TEXT + linkName + " - " + link.replace(" ", "%20");
 	}
 
@@ -65,5 +65,9 @@ public class Utils extends Activity{
 		if (Utils.getUtils().isAPIBelow14())
 			return ABOUT_CONTENT_LOW_API;
 		return ABOUT_CONTENT;
+	}
+	
+	public String getArticleNameFromLink(String link){
+		return link.substring(link.lastIndexOf("/") + 1, link.length());
 	}
 }

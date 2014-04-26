@@ -5,6 +5,9 @@
         android:id="@+id/topics"
         android:title="@string/bTopics"/>
     <item
+        android:id="@+id/lang"
+        android:title="@string/bLanguages"/>
+    <item
         android:id="@+id/about"
         android:title="@string/bAbout"/>
     <item

@@ -8,7 +8,6 @@
 package com.randwik;
 
 import java.util.ArrayList;
-
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -45,6 +44,8 @@ public class Manager extends Activity {
 	//IURLProvider provider = SimpleURLProvider.getURLProvider(); 
 	IURLProvider provider = LocalURLProvider.getURLProvider();
 
+	LanguagesProvider languages = LanguagesProvider.getLanguagesProvider();
+
 	/* For the chosen categories from the user */
 	protected static ArrayList<String> currentCategoriesList = new ArrayList<String>();
 	protected static String[] currentCategories;
@@ -67,6 +68,11 @@ public class Manager extends Activity {
 	boolean redirect = false;
 
 	ProgressDialog loadingWindow = null;
+
+	/* Variables for load page in a language feature */
+	protected String currentPageAtNewLanguage;
+	protected String currentPageAtOriginLanguage;
+	boolean loadLanguage = false;
 
 	/* Objects used for thread to wait */
 	Object waitForFinishLoad = new Object();
@@ -168,27 +174,47 @@ public class Manager extends Activity {
 		case R.id.ACIgetArticle:
 			getButtonClicked();
 			break;
-		case R.id.ACIshareArticle:	
+		case R.id.lang:
+			displayArticleLanguages(languages.getLangsStruct());
+			break;
+		case R.id.ACIshareArticle:
 			startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.bShare)));
 			break;
 		case R.id.exit:
 			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-			    @Override
-			    public void onClick(DialogInterface dialog, int which) {
-			        switch (which){
-			        case DialogInterface.BUTTON_POSITIVE:
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which){
+					case DialogInterface.BUTTON_POSITIVE:
 						finish();
-			            break;
-			        case DialogInterface.BUTTON_NEGATIVE:
-			            break;
-			        }
-			    }
+						break;
+					case DialogInterface.BUTTON_NEGATIVE:
+						break;
+					}
+				}
 			};
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void displayArticleLanguages(final String[][] langs) {
+		/* Create a languages dialog for the user */
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Choose Language");
+		builder.setItems(langs[2], new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int item) {
+				Log.e("Manager, choosen language:", "" + langs[0][item] + "." + langs[2][item]);
+				/* Separate the prefix of the link */
+				String mid = currentPage.substring(currentPage.indexOf("."), currentPage.lastIndexOf("/") + 1);
+				/* Add new prefix for the link */
+				currentPageAtNewLanguage = "http://" + langs[0][item] + mid + langs[1][item];
+				loadLanguage = true;
+				getButtonClicked();
+			}
+		}).show();
 	}
 
 	protected void backButtonClicked(){
@@ -335,17 +361,24 @@ public class Manager extends Activity {
 		private void loadPage(){
 			try {
 				String pageLink;
-				if (!fillCurrentCategories()) {
+				if (loadLanguage) {
+					pageLink = currentPageAtNewLanguage; 
+					loadLanguage = false;
+					Log.e("Getting page in other language",pageLink);
+				} else if (!fillCurrentCategories()) {
 					pageLink = (new SimpleURLProvider().getRandomPage(null, null));
+					currentPageAtOriginLanguage = pageLink;
 					Log.e("Getting random page",pageLink);
 				} else {/* Here we get the page link from the provider */
 					pageLink = provider.getRandomPage(currentCategories, null);
+					currentPageAtOriginLanguage = pageLink;
 					Log.e("Getting page from categories",pageLink);
 				}
 				previousPage = currentPage;
 				Log.e("Got page link", pageLink);
 				currentPage = pageLink;
 				updateIntent();
+				languages.createLanguagesItems(currentPageAtOriginLanguage);
 
 				/* Loading the page */
 				webViewMain.loadUrl(pageLink);

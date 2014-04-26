@@ -10,5 +10,6 @@
     <string name="bAbout">About</string>
     <string name="bShare">Share</string>
     <string name="bExit">Exit...</string>
+    <string name="bLanguages">Choose Language</string>
     
 </resources>
