@@ -21,7 +21,7 @@ import com.randwik.LocalDB.CategoriesMap;
 
 public class LocalURLProvider implements IURLProvider{
 
-	private static String pageLinkPrefix = "http://en.wikipedia.org/wiki/";
+	private static String pageLinkPrefix = "http://he.wikipedia.org/wiki/";
 	private static IURLProvider singleProvider = null;
 	private ICategoryDB categoryDB = CategoriesMap.getCategoriesMap();
 	Random rand = new Random(System.currentTimeMillis());
