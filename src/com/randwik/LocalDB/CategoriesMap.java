@@ -48,7 +48,7 @@ public class CategoriesMap extends HashMap<String, AbstractCategory> implements 
 		this.put("Nature", new NatureCategory());
 		this.put("People", new PeopleCategory());
 		this.put("Politics", new PoliticsCategory());
-		this.put("Professional studies", new ProfessionalStudiesCategory());
+		this.put("ProfessionalStudies", new ProfessionalStudiesCategory());
 		this.put("Science", new ScienceCategory());
 		this.put("Sports", new SportsCategory());
 		this.put("Technology", new TechnologyCategory());
