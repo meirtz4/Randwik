@@ -336,7 +336,7 @@ public class Manager extends Activity {
 			try {
 				String pageLink;
 				if (!fillCurrentCategories()) {
-					pageLink = (new SimpleURLProvider().getRandomPage(null, null));
+					pageLink = "http://he.wikipedia.org/wiki/%D7%A2%D7%9E%D7%95%D7%93_%D7%A8%D7%90%D7%A9%D7%99";
 					Log.e("Getting random page",pageLink);
 				} else {/* Here we get the page link from the provider */
 					pageLink = provider.getRandomPage(currentCategories, null);
