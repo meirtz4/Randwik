@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.randwik_pack"
-    android:versionCode="2"
-    android:versionName="2.1" >
+    package="com.heb_randwik_pack"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -29,7 +29,7 @@
             android:name="com.randwik.Prefs"
             android:label="@string/title_activity_manager" >
             <intent-filter>
-                <action android:name="android.intent.action.PREFS" />
+                <action android:name="android.intent.action.HEB_PREFS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

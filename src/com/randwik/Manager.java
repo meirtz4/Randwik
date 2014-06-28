@@ -14,7 +14,7 @@ import com.google.ads.AdSize;
 import com.google.ads.AdView;
 import com.randwik.Interfaces.IURLProvider;
 import com.randwik.LocalDB.CategoriesMap;
-import com.randwik_pack.R;
+import com.heb_randwik_pack.R;
 import Utils.Utils;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -155,7 +155,7 @@ public class Manager extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 		case R.id.topics:
-			Intent p = new Intent("android.intent.action.PREFS");
+			Intent p = new Intent("android.intent.action.HEB_PREFS");
 			startActivity(p);
 			break;
 		case R.id.about:

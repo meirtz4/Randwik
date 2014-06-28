@@ -6,7 +6,7 @@
 
 package com.randwik;
 
-import com.randwik_pack.R;
+import com.heb_randwik_pack.R;
 
 import Utils.Utils;
 import android.annotation.TargetApi;
