@@ -14,14 +14,14 @@ public class Utils extends Activity{
 
 	protected static Utils utils = null;
 	protected AlertDialog.Builder dlgAbout;
-	protected static String SHARE_TEXT = "Interesting Wikipedia Article from Randwik: ";
-	protected static String PAGE_NOTLOADED = "Page Not Loaded Yet... ";
-	protected static String ABOUT_TITLE = "Randwik 2.1";
-	protected static String ABOUT_CONTENT = "RandWik let's you enjoy in your free time from Wikipedia Articles.\n\n" +
-											"By tapping the W button Randwik will load you a random article\n" +
-											"You can use Randwik to focus the search on your favourite subjects by marking them in Topics menu,\n" +
-											"You can also share the current article with your friends !\n\n" +
-											"Enjoy,\nFatboyD team,\n2014.";
+	protected static String SHARE_TEXT = "מאמר מענין בויקיפדיה שקיבלתי מרנדוויק: ";
+	protected static String PAGE_NOTLOADED = "הדף עדיין בטעינה...";
+	protected static String ABOUT_TITLE = "Heb-Randwik 1.0";
+	protected static String ABOUT_CONTENT = "רנדוויק מספקת מאמרים איכותיים מויקיפדיה כדי שתוכל לקרוא בזמנך הפנוי.\n\n" +
+											"לחץ על ה-W כדי לטעון מאמר אקראי חדש,\n" +
+											"ניתן לצמצם את המאמרים לתחומי הענין המתאימים לך על-ידי לחיצה על כפתור הנושאים,\n" +
+											"אפשר גם לחלוק את המאמרים שאהבת עם החברים שלך !\n\n" +
+											"תהנו,\nFatboyD team,\n2014.";
 	protected static String ABOUT_CONTENT_LOW_API = "Enjoy, FatboyD team - 2014.";
 
 	protected Utils() {
